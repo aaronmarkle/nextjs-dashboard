@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
   return await shopify.auth.begin({
     // @ts-ignore
     shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
-    callbackPath: '/api/auth/callback',
+    callbackPath: 'https://nextjs-dashboard-three-omega.vercel.app/api/auth/callback',
     isOnline: false,
     rawRequest: request,
   })
