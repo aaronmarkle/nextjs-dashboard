@@ -6,7 +6,7 @@ const shopify = shopifyApi({
   apiKey: 'cda9530df1b3ad8863f567650dc71fdc',
   apiSecretKey: 'f308cad37fe67183ba4104e3692ded23',
   scopes: ['read_products'],
-  hostName: 'https://nextjs-dashboard-three-omega.vercel.app/',
+  hostName: 'https://nextjs-dashboard-three-omega.vercel.app',
   apiVersion: LATEST_API_VERSION,
   isEmbeddedApp: true,
 });
@@ -20,7 +20,7 @@ export function GET(request: NextRequest) {
   return shopify.auth.begin({
     // @ts-ignore
     shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
-    callbackPath: '/auth/callback',
+    callbackPath: 'api/auth/callback',
     isOnline: false,
     rawRequest: request,
   });
