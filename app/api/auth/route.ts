@@ -1,4 +1,4 @@
-import '@shopify/shopify-api/adapters/node'
+import '@shopify/shopify-api/adapters/web-api';
 import {shopifyApi, LATEST_API_VERSION} from '@shopify/shopify-api'
 import { NextResponse, type NextRequest } from 'next/server'
 
@@ -22,6 +22,5 @@ export async function GET(request: NextRequest, response: NextResponse) {
     callbackPath: '/api/auth/callback',
     isOnline: false,
     rawRequest: request,
-    rawResponse: response,
   })
 }
