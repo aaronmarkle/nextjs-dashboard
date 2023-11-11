@@ -3,10 +3,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start"
+    "start": "next start",
+    "seed": "node -r dotenv/config ./scripts/seed.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@shopify/polaris": "^12.1.1",
+    "@shopify/shopify-api": "^8.0.2",
     "@tailwindcss/forms": "^0.5.6",
     "@types/node": "20.5.7",
     "@vercel/postgres": "^0.5.0",
