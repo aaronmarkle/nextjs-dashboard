@@ -1,6 +1,6 @@
 import '@shopify/shopify-api/adapters/node'
 import {shopifyApi, LATEST_API_VERSION} from '@shopify/shopify-api'
-import { type NextRequest, type NextResponse } from 'next/server'
+import { type NextRequest } from 'next/server'
 
 const shopify = shopifyApi({
   // The next 4 values are typically read from environment variables for added security
@@ -12,21 +12,15 @@ const shopify = shopifyApi({
   isEmbeddedApp: true,
 });
 
-export async function GET(request: NextRequest, response: NextResponse) {
-  try {
-    const searchParams = request.nextUrl.searchParams
-  console.log('ASDF:', searchParams.get('shop'))
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams
 
   // The library will return a Response object
-  return await shopify.auth.begin({
+  await shopify.auth.begin({
     // @ts-ignore
     shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
     callbackPath: '/api/auth/callback',
     isOnline: false,
     rawRequest: request,
-    rawResponse: response,
   })
-  } catch (error) {
-    console.log('console log error:', error)
-  }
 }
