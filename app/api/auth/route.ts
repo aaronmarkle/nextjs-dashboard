@@ -18,6 +18,7 @@ export function GET(request: NextRequest) {
 
   // The library will return a Response object
   return shopify.auth.begin({
+    // @ts-ignore
     shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
     callbackPath: '/auth/callback',
     isOnline: false,
