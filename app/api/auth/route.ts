@@ -15,12 +15,13 @@ import { type NextRequest } from 'next/server'
  
 export function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
+  console.log('ASDF:', searchParams.get('shop'))
 
   // The library will return a Response object
   return shopify.auth.begin({
     // @ts-ignore
     shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
-    callbackPath: 'api/auth/callback',
+    callbackPath: '/api/auth/callback',
     isOnline: false,
     rawRequest: request,
   });
