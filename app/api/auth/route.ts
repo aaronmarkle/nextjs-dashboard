@@ -13,7 +13,8 @@ const shopify = shopifyApi({
 });
 
 export async function GET(request: NextRequest, response: NextResponse) {
-  const searchParams = request.nextUrl.searchParams
+  try {
+    const searchParams = request.nextUrl.searchParams
   console.log('ASDF:', searchParams.get('shop'))
 
   // The library will return a Response object
@@ -24,5 +25,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
     isOnline: false,
     rawRequest: request,
     rawResponse: response,
-  });
+  })
+  } catch (error) {
+    console.log('console log error:', error)
+  }
 }
