@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
   const searchParams = request.nextUrl.searchParams
 
   // The library will return a Response object
-  await shopify.auth.begin({
+  return await shopify.auth.begin({
     // @ts-ignore
     shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
     callbackPath: '/api/auth/callback',
