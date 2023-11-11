@@ -1,6 +1,6 @@
 import '@shopify/shopify-api/adapters/node'
 import {shopifyApi, LATEST_API_VERSION} from '@shopify/shopify-api'
-import { type NextRequest } from 'next/server'
+import { type NextRequest, type NextResponse } from 'next/server'
 
 const shopify = shopifyApi({
   // The next 4 values are typically read from environment variables for added security
@@ -12,7 +12,7 @@ const shopify = shopifyApi({
   isEmbeddedApp: true,
 });
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, response: NextResponse) {
   const searchParams = request.nextUrl.searchParams
   console.log('ASDF:', searchParams.get('shop'))
 
@@ -23,5 +23,6 @@ export async function GET(request: NextRequest) {
     callbackPath: '/api/auth/callback',
     isOnline: false,
     rawRequest: request,
+    rawResponse: response,
   });
 }
