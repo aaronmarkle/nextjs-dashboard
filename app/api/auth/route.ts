@@ -1,5 +1,6 @@
 import '@shopify/shopify-api/adapters/node'
 import {shopifyApi, LATEST_API_VERSION} from '@shopify/shopify-api'
+import { type NextRequest } from 'next/server'
 
 const shopify = shopifyApi({
   // The next 4 values are typically read from environment variables for added security
@@ -11,25 +12,16 @@ const shopify = shopifyApi({
   isEmbeddedApp: true,
 });
 
-import { type NextRequest } from 'next/server'
- 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
-  console.log('asdf:', shopify.auth.begin({
+  console.log('ASDF:', searchParams.get('shop'))
+
+  // The library will return a Response object
+  return await shopify.auth.begin({
     // @ts-ignore
     shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
     callbackPath: '/api/auth/callback',
     isOnline: false,
     rawRequest: request,
-  }))
-
-  // The library will return a Response object
-  return new Response('Hello world')
-  // return shopify.auth.begin({
-  //   // @ts-ignore
-  //   shop: shopify.utils.sanitizeShop(searchParams.get('shop'), true),
-  //   callbackPath: '/api/auth/callback',
-  //   isOnline: false,
-  //   rawRequest: request,
-  // });
+  });
 }
